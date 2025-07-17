@@ -1,3 +1,4 @@
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -77,7 +78,6 @@ public class PlayerController : MonoBehaviour
 
 
 
-
         if (ResetEverything)
         {
             transform.position = Vector3.zero;
@@ -98,7 +98,11 @@ public class PlayerController : MonoBehaviour
     {
         if (other.CompareTag("Astroid"))
         {
-            Destroy(gameObject);
+            gameObject.SetActive(false);
         }
+
+        
+
     }
+
 }

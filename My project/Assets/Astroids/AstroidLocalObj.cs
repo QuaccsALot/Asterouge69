@@ -41,4 +41,11 @@ public class AstroidLocalObj : MonoBehaviour
         // Step 3: Move forward toward center
         transform.Translate(Vector3.up * speed * Time.deltaTime);
     }
+
+
+
+
+
+
+
 }
