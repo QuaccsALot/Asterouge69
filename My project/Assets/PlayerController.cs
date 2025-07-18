@@ -8,23 +8,24 @@ public class PlayerController : MonoBehaviour
     public float forwardForce = 5f;
     public float maxSpeed = 5f;
 
+    public float velocityThreshold = 6f;
+    public float normalDamping = 5f;
+    public float highDamping = 3f;
+
 
     [Header("Debug")]
     public Rigidbody2D _rb;
     public Vector2 worldVelocity;
     public bool ResetEverything = false;
 
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
+        _rb.linearDamping = normalDamping;
+
     }
-
-
-
-
-
-
 
 
 
@@ -33,13 +34,25 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        float speed = _rb.linearVelocity.magnitude;
 
-
-
-        if (Input.GetKey(KeyCode.RightArrow))
+        if (speed > velocityThreshold)
         {
-            transform.Rotate(0, 0, -Time.deltaTime * turnSpeed);
+            _rb.linearDamping = highDamping;
         }
+        else
+        {
+            _rb.linearDamping = normalDamping;
+        }
+
+
+
+
+
+            if (Input.GetKey(KeyCode.RightArrow))
+            {
+                transform.Rotate(0, 0, -Time.deltaTime * turnSpeed);
+            }
 
 
 

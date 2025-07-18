@@ -11,7 +11,7 @@ public class pewpew : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             GameObject newnew = Instantiate(prefab, transform.position, Quaternion.identity);
 

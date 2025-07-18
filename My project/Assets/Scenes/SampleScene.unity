@@ -148,7 +148,7 @@ Transform:
   m_GameObject: {fileID: 268854661}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 17.5, y: 0, z: 0}
+  m_LocalPosition: {x: 19.07, y: 0, z: 0}
   m_LocalScale: {x: 42.99, y: 0.25, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -167,7 +167,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   side: 1
-  distX: 14
+  distX: 17
   distY: 10
   DistAdded: {x: 0, y: 0}
 --- !u!61 &268854664
@@ -555,7 +555,7 @@ Transform:
   m_GameObject: {fileID: 740476422}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 13, z: 0}
+  m_LocalPosition: {x: 0, y: 12.22, z: 0}
   m_LocalScale: {x: 42.99, y: 0.25, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -574,7 +574,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   side: 0
-  distX: 14
+  distX: 17
   distY: 10
   DistAdded: {x: 0, y: 0}
 --- !u!61 &740476425
@@ -873,7 +873,7 @@ Transform:
   m_GameObject: {fileID: 1010909675}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.15, y: -13, z: 0}
+  m_LocalPosition: {x: -0.15, y: -12.26, z: 0}
   m_LocalScale: {x: 42.99, y: 0.25, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -892,7 +892,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   side: 2
-  distX: 14
+  distX: 17
   distY: 10
   DistAdded: {x: 0, y: 0}
 --- !u!50 &1010909680
@@ -1097,9 +1097,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71de1d38a8fa5f748ab735424a8bcca3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  turnSpeed: 300
-  forwardForce: 5
-  maxSpeed: 8
+  turnSpeed: 350
+  forwardForce: 15
+  maxSpeed: 3
+  velocityThreshold: 3
+  normalDamping: 1
+  highDamping: 15
   _rb: {fileID: 0}
   worldVelocity: {x: 0, y: 0}
   ResetEverything: 0
@@ -1132,7 +1135,7 @@ Transform:
   m_GameObject: {fileID: 1435884838}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: -17.5, y: 0, z: 0}
+  m_LocalPosition: {x: -19, y: 0, z: 0}
   m_LocalScale: {x: 42.99, y: 0.25, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1151,7 +1154,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   side: 3
-  distX: 14
+  distX: 17
   distY: 10
   DistAdded: {x: 0, y: 0}
 --- !u!61 &1435884841
@@ -1311,7 +1314,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ce6eb0991fbe8447838dc9d08464c94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeToSpawn: 3
+  timeToSpawn: 5
   twoPointsToDefPlace:
   - {x: -12, y: 7.83, z: 0}
   - {x: 12, y: -7.83, z: 0}
@@ -1432,6 +1435,14 @@ PrefabInstance:
     - target: {fileID: 638733092654818346, guid: b40eb8f31764e8d47ae6e7a1bf4e6fe7, type: 3}
       propertyPath: m_Name
       value: JohnTheSpaceShipYAA
+      objectReference: {fileID: 0}
+    - target: {fileID: 5397139074617772093, guid: b40eb8f31764e8d47ae6e7a1bf4e6fe7, type: 3}
+      propertyPath: m_LinearDamping
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5397139074617772093, guid: b40eb8f31764e8d47ae6e7a1bf4e6fe7, type: 3}
+      propertyPath: m_AngularDamping
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8776730927003183345, guid: b40eb8f31764e8d47ae6e7a1bf4e6fe7, type: 3}
       propertyPath: m_LocalPosition.x

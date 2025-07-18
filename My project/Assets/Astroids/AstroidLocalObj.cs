@@ -1,3 +1,4 @@
+using System.Linq.Expressions;
 using UnityEngine;
 
 public class AstroidLocalObj : MonoBehaviour
@@ -5,6 +6,12 @@ public class AstroidLocalObj : MonoBehaviour
     public float speed = 15f;
     public float speedRandomization = 5f;
     public float positionRandomization = 50f;
+
+
+    public GameObject prefab;
+
+
+
 
     public void setAstroid()
     {
@@ -34,15 +41,60 @@ public class AstroidLocalObj : MonoBehaviour
     }
 
 
-    void Update()
+    void Update()    
     {
 
 
         // Step 3: Move forward toward center
         transform.Translate(Vector3.up * speed * Time.deltaTime);
+
+
+
+
+
     }
 
 
+
+
+
+
+        public void OnTriggerEnter2D(Collider2D other)
+        {
+
+            if (other.CompareTag("Bullet"))
+            {
+
+            try
+            {
+                GameObject var = Instantiate(prefab, transform.position, Quaternion.identity);
+
+                AstroidLocalObj var2 = var.GetComponent<AstroidLocalObj>();
+
+                var2.speed = 3f;
+
+                var2.setAstroid();
+
+
+
+                GameObject var3 = Instantiate(prefab, transform.position, Quaternion.identity);
+
+                AstroidLocalObj var4 = var.GetComponent<AstroidLocalObj>();
+
+                var4.speed = 3f;
+
+                var4.setAstroid();
+            } catch { }
+
+
+
+
+
+            gameObject.SetActive(false);
+
+            }
+
+        }
 
 
 
