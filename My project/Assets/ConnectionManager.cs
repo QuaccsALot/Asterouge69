@@ -2,6 +2,10 @@ using System.Collections.Generic;
 using NUnit.Framework;
 using UnityEngine;
 using static UnityEngine.Rendering.DebugUI;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEditor.MemoryProfiler;
+using UnityEditor.PackageManager.Requests;
 
 
 [System.Serializable]
@@ -15,6 +19,7 @@ public class powerUp
     public string function_StartName = "";
     public string function_UpdateName = "";
     public string function_EndName = "";
+    public string objectName = ""; //USUALLY JohnTheSpaceShipYAA or Gun
 
 
 
@@ -24,7 +29,7 @@ public class powerUp
 
 
 
-
+ 
 
 
 
@@ -43,6 +48,8 @@ public class ConnectionManager : MonoBehaviour
     [Header("(NO TOUCHY DURING GP) Exposed Statics - dictionary"), Space(23)]
     public List<powerUp> EXPO_powerUpDictionary = new List<powerUp>();
 
+    public bool testingFUCKYOU = false;
+
     //[Header("(NO TOUCHY DURING GP) Exposed Statics - current")]
 
 
@@ -56,6 +63,7 @@ public class ConnectionManager : MonoBehaviour
     public static List<powerUp> powerUpDictionary = new List<powerUp>();
     public static List<powerUp> CURRENTpowerUps = new List<powerUp>();
     public static int CURRENTscore = 0;
+    public static List<powerUp> needToInitializePowerUps = new List<powerUp>();
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
@@ -125,6 +133,27 @@ public class ConnectionManager : MonoBehaviour
         {
             CURRENTscore = instance.EXPO_CURRENTscore;
         }
+
+        try
+        {
+            foreach (var item in CURRENTpowerUps)
+            {
+                if (item.function_UpdateName != "")
+                {
+                    GameObject obj = GameObject.Find(item.objectName);
+                    obj.SendMessage(item.function_UpdateName);
+                }
+            }
+        }
+        catch { }
+
+
+
+        if (testingFUCKYOU)
+        {
+            ConnectionManager.AddPowerUp("shotgun");
+            testingFUCKYOU = false;
+        }
     }
 
 
@@ -136,6 +165,32 @@ public class ConnectionManager : MonoBehaviour
 
 
 
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        Debug.Log("Scene changed to: " + scene.name);
+        if (scene.name != "Gameplay") return;
+
+
+
+        foreach (var item in needToInitializePowerUps)
+        {
+            if (item.function_StartName != "")
+            {
+                GameObject obj = GameObject.Find(item.objectName);
+                obj.SendMessage(item.function_StartName);
+
+                print("Initialized: " + obj.name + " ability");
+            }
+        }
+
+        needToInitializePowerUps.Clear();
+    }
+
+
+
+
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
@@ -162,6 +217,8 @@ public class ConnectionManager : MonoBehaviour
 
         ConnectionManager.CURRENTpowerUps.Add(new_powerUpData);
         SubtractScore(new_powerUpData.price);
+
+        ConnectionManager.needToInitializePowerUps.Add(new_powerUpData);
     }
 
 

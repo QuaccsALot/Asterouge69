@@ -452,9 +452,9 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1936848923}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -424, y: 262}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 109, y: -38}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &339676576
@@ -1185,9 +1185,11 @@ MonoBehaviour:
   - name: shotgun
     rarity: 0
     function_StartName: 
-    function_UpdateName: 
+    function_UpdateName: CM_shotgunUpdate
     function_EndName: 
+    objectName: Gun
     price: 69420
+  testingFUCKYOU: 0
 --- !u!4 &1120363613
 Transform:
   m_ObjectHideFlags: 0
@@ -1560,7 +1562,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ce6eb0991fbe8447838dc9d08464c94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeToSpawn: 5
+  timeToSpawn: 1.5
   twoPointsToDefPlace:
   - {x: -12, y: 7.83, z: 0}
   - {x: 12, y: -7.83, z: 0}
