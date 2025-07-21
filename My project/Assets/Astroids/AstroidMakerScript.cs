@@ -20,6 +20,10 @@ public class AstroidMakerScript : MonoBehaviour
     [SerializeField, Header("Debug bc I'm DUM DUM"), Space(20)]
     private float timeSinceSpawn = 0;
 
+    public int count = 0;
+    
+
+
 
     void SPAWNTHINGY()
     {
@@ -69,18 +73,22 @@ public class AstroidMakerScript : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        SPAWNTHINGY();
+        SPAWNTHINGY();
+        SPAWNTHINGY();
+        SPAWNTHINGY();
     }
 
     // Update is called once per frame
     void Update()
     {
-        timeSinceSpawn += Time.deltaTime;
-
-        if (timeSinceSpawn > timeToSpawn)
+        if (count == 16)
         {
             SPAWNTHINGY();
-            timeSinceSpawn = 0;
+            SPAWNTHINGY();
+            SPAWNTHINGY();
+            SPAWNTHINGY();
+            count = 0;
         }
     }
 }

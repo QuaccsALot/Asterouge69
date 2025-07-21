@@ -1,4 +1,5 @@
 using System.Linq.Expressions;
+using System.Threading;
 using UnityEngine;
 
 public class AstroidLocalObj : MonoBehaviour
@@ -56,6 +57,31 @@ public class AstroidLocalObj : MonoBehaviour
 
 
 
+    void newFunc()
+    {
+        GameObject nag = GameObject.Find("Sh!t ahh text");
+        score ger = nag.GetComponent<score>();
+        
+
+        if (gameObject.name == "big boi(Clone)")
+        {
+            ger.numba += 20;
+        }
+        if (gameObject.name == "medium boi(Clone)")
+        {
+            ger.numba += 30;
+        }
+        if (gameObject.name == "small boi(Clone)")
+        {
+            ger.numba += 40;
+            GameObject yur = GameObject.Find("AstroidMaker");
+            AstroidMakerScript yur2 = yur.GetComponent<AstroidMakerScript>();
+            yur2.count += 1;
+        }
+        
+    }
+
+
 
 
 
@@ -64,6 +90,8 @@ public class AstroidLocalObj : MonoBehaviour
 
             if (other.CompareTag("Bullet"))
             {
+            newFunc();
+
 
             try
             {
@@ -90,9 +118,20 @@ public class AstroidLocalObj : MonoBehaviour
 
 
 
-            gameObject.SetActive(false);
+            Destroy(gameObject);
 
             }
+            
+
+
+
+
+
+
+
+
+
+
 
         }
 
