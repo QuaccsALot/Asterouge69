@@ -18,17 +18,17 @@ public class Purchaseable : MonoBehaviour
     [Header("General")]
     public bool Canbuy = false;
     public bool Sold = false;
-    [SerializeField, Header("Upgrade Atributes"), Space(20)]
-    public float DamageAdded = 0;
-    public float DamageMult = 1;
-    public float SpeedAdded = 0;
-    public float AtkSpeedMult = 1;
-    public float AtkSpeedAdded = 0;
-    public float RangeAdded = 0;
-    public int SpecialUpgrade = 0;
-    public int Rareity = 0;
-    public float price = 0;
 
+    public powerUp powerUpData;
+
+
+
+
+
+
+
+
+    [Header("private stuffs")] //not shown
     private float jiggleReducer = 0;
     private float ExpandedSize = 0;
     private float basesizeX = 0;
@@ -38,50 +38,50 @@ public class Purchaseable : MonoBehaviour
     private byte baseB = 0;
     private TMP_Text PriceText;
     private ParticleSystem CanBuyParts;
-    private ShopUI Globalstats;
 
 
 
     //---------------------------------------------------------Start down
     void Start()
     {
+        powerUpData = ConnectionManager.GetPowerUpData("shotgun");
+
         Transform parentTransform = transform.parent;
-        Globalstats = parentTransform.GetComponent<ShopUI>();
         PriceText = GetComponentInChildren<TextMeshProUGUI>();
         CanBuyParts = GetComponentInChildren<ParticleSystem>();
         basesizeX = transform.localScale.x;
         basesizeY = transform.localScale.y;
 
-        if (Rareity is 0)
+        if (powerUpData.rarity is 0)
         {
             baseR = 136;
             baseG = 255;
             baseB = 0;
-            price = 4000;
+            powerUpData.price = 4000;
         }
-        else if (Rareity is 1)
+        else if (powerUpData.rarity is 1)
         {
             baseR = 0;
             baseG = 215;
             baseB = 255;
-            price = 6000;
+            powerUpData.price = 6000;
         }
-        else if (Rareity is 2)
+        else if (powerUpData.rarity is 2)
         {
             baseR = 170;
             baseG = 0;
             baseB = 255;
-            price = 9000;
+            powerUpData.price = 9000;
         }
-        else if (Rareity is 3)
+        else if (powerUpData.rarity is 3)
         {
             baseR = 255;
             baseG = 170;
             baseB = 0;
-            price = 13000;
+            powerUpData.price = 13000;
 
         }
-        PriceText.text = price.ToString();
+        PriceText.text = "" + powerUpData.price;
         CanBuyParts.startColor = new Color32(baseR, baseG, baseB, 20);
         CanBuyParts.startLifetime = .5f;
 
@@ -109,37 +109,42 @@ public class Purchaseable : MonoBehaviour
     //purchase effects
     private void OnMouseDown()
     {
-        if (Globalstats.Points >= price)
+        if (ConnectionManager.CURRENTscore >= powerUpData.price)
         {
-            Globalstats.Points = Globalstats.Points - price;
+            ConnectionManager.SubtractScore(powerUpData.price);
             Sold = true;
             CanBuyParts.Stop();
             PriceText.text = "SOLD";
 
+            #region
             //The upgrade traits
-            Globalstats.Atkspeed = (Globalstats.Atkspeed + AtkSpeedAdded) * AtkSpeedMult;
-            Globalstats.Damage = (Globalstats.Damage + DamageAdded) * DamageMult;
-            Globalstats.Speed = (Globalstats.Speed + SpeedAdded);
-            Globalstats.Range = Globalstats.Range + RangeAdded;
+            //Globalstats.Atkspeed = (Globalstats.Atkspeed + AtkSpeedAdded) * AtkSpeedMult;
+            //Globalstats.Damage = (Globalstats.Damage + DamageAdded) * DamageMult;
+            //Globalstats.Speed = (Globalstats.Speed + SpeedAdded);
+            //Globalstats.Range = Globalstats.Range + RangeAdded;
+            ////-----------------------------
+            ////applies Special upgrade tags
+            //if (SpecialUpgrade is 1)
+            //{
+            //    Globalstats.SpecialUp1 = true;
+            //}
+            //else if (SpecialUpgrade is 2)
+            //{
+            //    Globalstats.SpecialUp2 = true;
+            //}
+            //else if (SpecialUpgrade is 3)
+            //{
+            //    Globalstats.SpecialUp3 = true;
+            //}
+            //else if (SpecialUpgrade is 4)
+            //{
+            //    Globalstats.SpecialUp4 = true;
+            //}
             //-----------------------------
-            //applies Special upgrade tags
-            if (SpecialUpgrade is 1)
-            {
-                Globalstats.SpecialUp1 = true;
-            }
-            else if (SpecialUpgrade is 2)
-            {
-                Globalstats.SpecialUp2 = true;
-            }
-            else if (SpecialUpgrade is 3)
-            {
-                Globalstats.SpecialUp3 = true;
-            }
-            else if (SpecialUpgrade is 4)
-            {
-                Globalstats.SpecialUp4 = true;
-            }
-            //-----------------------------
+            #endregion
+
+
+
 
             print("bought");
         }
@@ -149,7 +154,7 @@ public class Purchaseable : MonoBehaviour
     void Update()
     {
         //Checks if its purchasable
-        if (Globalstats.Points >= price)
+        if (ConnectionManager.CURRENTscore >= powerUpData.price)
         {
             Canbuy = true;
 
