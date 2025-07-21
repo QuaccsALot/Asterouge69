@@ -432,7 +432,7 @@ GameObject:
   - component: {fileID: 339676577}
   - component: {fileID: 339676576}
   m_Layer: 5
-  m_Name: I LOVE UNITY SO MUCH FUCK
+  m_Name: Sh!t ahh text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -469,6 +469,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e06a8c7ea5204734da62e3c777141942, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  numba: 0
 --- !u!114 &339676577
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1569,6 +1570,7 @@ MonoBehaviour:
   forceAmount: 1
   prefab: {fileID: 3119300005067457361, guid: f71480f067853f445bcc55c00e075033, type: 3}
   timeSinceSpawn: 0
+  count: 0
 --- !u!4 &1832278987
 Transform:
   m_ObjectHideFlags: 0
