@@ -1,4 +1,5 @@
 using System.Linq.Expressions;
+using System.Threading;
 using UnityEngine;
 
 public class AstroidLocalObj : MonoBehaviour
@@ -73,8 +74,11 @@ public class AstroidLocalObj : MonoBehaviour
         if (gameObject.name == "small boi(Clone)")
         {
             ger.numba += 40;
+            GameObject yur = GameObject.Find("AstroidMaker");
+            AstroidMakerScript yur2 = yur.GetComponent<AstroidMakerScript>();
+            yur2.count += 1;
         }
-
+        
     }
 
 
@@ -114,7 +118,7 @@ public class AstroidLocalObj : MonoBehaviour
 
 
 
-            gameObject.SetActive(false);
+            Destroy(gameObject);
 
             }
             
