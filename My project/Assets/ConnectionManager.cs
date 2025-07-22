@@ -286,4 +286,29 @@ public class ConnectionManager : MonoBehaviour
     {
         ConnectionManager.CURRENTscore -= deltaScore;
     }
+
+
+
+    public static powerUp GetRandom__AbilData()
+    {
+        return powerUpDictionary[Random.Range(0, powerUpDictionary.Count - 1)];
+    }
+
+
+
+
+    public static powerUp GetRandomAbilOfRarity(int rarity)
+    {
+        List<powerUp> name = new List<powerUp>();
+
+        foreach (var item in powerUpDictionary)
+        {
+            if (item.rarity == rarity)
+            {
+                name.Add(item);
+            }
+        }
+
+        return name[Random.Range(0, name.Count - 1)];
+    }
 }

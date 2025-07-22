@@ -9,6 +9,8 @@ using Unity.Mathematics;
 using UnityEditor.Rendering;
 using Unity.VisualScripting.Antlr3.Runtime.Tree;
 using System.Runtime.CompilerServices;
+using Random = UnityEngine.Random;
+using UnityEditor.ShaderKeywordFilter;
 
 public class Purchaseable : MonoBehaviour
 {
@@ -16,41 +18,58 @@ public class Purchaseable : MonoBehaviour
     //def global vars
     //replace Temp Vars with Real Vars
     [Header("General")]
-    public bool Canbuy = false;
-    public bool Sold = false;
+    public bool TopOrBottom = false;
 
+    [Header("Stuffs")]
+    public TMP_Text PriceText;
+    public ParticleSystem CanBuyParts;
     public powerUp powerUpData;
-
-
-
-
-
-
-
 
     [Header("private stuffs")] //not shown
     private float jiggleReducer = 0;
     private float ExpandedSize = 0;
     private float basesizeX = 0;
     private float basesizeY = 0;
-    private byte baseR = 0;
-    private byte baseG = 0;
-    private byte baseB = 0;
-    private TMP_Text PriceText;
-    private ParticleSystem CanBuyParts;
+    byte baseR = 0;
+    byte baseG = 0;
+    byte baseB = 0;
+    public bool Canbuy = false;
+    private bool Sold = false;
+    private bool PartsPlaying = false;
+    public int temprarity = 0;
 
 
 
     //---------------------------------------------------------Start down
     void Start()
     {
-        powerUpData = ConnectionManager.GetPowerUpData("shotgun");
-
+        powerUpData = new powerUp();
         Transform parentTransform = transform.parent;
-        PriceText = GetComponentInChildren<TextMeshProUGUI>();
-        CanBuyParts = GetComponentInChildren<ParticleSystem>();
+        PriceText = transform.parent.GetComponentInChildren<TMP_Text>();
         basesizeX = transform.localScale.x;
         basesizeY = transform.localScale.y;
+        if  (TopOrBottom)
+        { temprarity = Random.Range(9, 17); }
+        else
+        { temprarity = Random.Range(0, 15); }
+
+                    if (temprarity <= 7)
+                    {
+                powerUpData = ConnectionManager.GetRandomAbilOfRarity(0);
+                    }
+                    else if (temprarity <= 12)
+                    {
+                powerUpData = ConnectionManager.GetRandomAbilOfRarity(1);
+            }
+                    else if (temprarity <= 15)
+                    {
+                powerUpData = ConnectionManager.GetRandomAbilOfRarity(2);
+            }
+                   else
+                   {
+                powerUpData = ConnectionManager.GetRandomAbilOfRarity(3);
+            }
+
 
         if (powerUpData.rarity is 0)
         {
@@ -81,10 +100,11 @@ public class Purchaseable : MonoBehaviour
             powerUpData.price = 13000;
 
         }
-        PriceText.text = "" + powerUpData.price;
+        PriceText.text = new string("$" + powerUpData.price);
         CanBuyParts.startColor = new Color32(baseR, baseG, baseB, 20);
         CanBuyParts.startLifetime = .5f;
-
+        CanBuyParts.Play(true);
+        PartsPlaying = true;
 
     }
     //---------------------------------------------------------Start up
@@ -95,7 +115,7 @@ public class Purchaseable : MonoBehaviour
         {
             jiggleReducer = jiggleReducer + 10;
             ExpandedSize = ExpandedSize + 1;
-            CanBuyParts.startLifetime = 1;
+            CanBuyParts.startLifetime = 1f;
             CanBuyParts.startColor = new Color32(baseR, baseG, baseB, 200);
         }
 
@@ -114,6 +134,7 @@ public class Purchaseable : MonoBehaviour
             ConnectionManager.SubtractScore(powerUpData.price);
             Sold = true;
             CanBuyParts.Stop();
+            PartsPlaying = false;
             PriceText.text = "SOLD";
 
             #region
@@ -143,9 +164,6 @@ public class Purchaseable : MonoBehaviour
             //-----------------------------
             #endregion
 
-
-
-
             print("bought");
         }
 
@@ -157,7 +175,6 @@ public class Purchaseable : MonoBehaviour
         if (ConnectionManager.CURRENTscore >= powerUpData.price)
         {
             Canbuy = true;
-
         }
         else
         {
@@ -171,7 +188,15 @@ public class Purchaseable : MonoBehaviour
         // Particle Emmitter
         if (!Canbuy)
         {
-            CanBuyParts.Stop();
+            CanBuyParts.Stop(true);
+            Debug.Log("suppose to stop parts");
+            PartsPlaying = false;
+        }
+        else if (!PartsPlaying) 
+        {
+            CanBuyParts.Play(true);
+            Debug.Log("suppose to play parts");
+            PartsPlaying = true;
         }
         //-----------------------------
         //appling hover effects
@@ -196,6 +221,10 @@ public class Purchaseable : MonoBehaviour
         //-----------------------------
     }
     //---------------------------------------------------------updates up
+
+
+
+
 
 
 }
