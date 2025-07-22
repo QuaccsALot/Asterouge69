@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
@@ -24,7 +25,6 @@ public class PlayerController : MonoBehaviour
     {
         _rb = GetComponent<Rigidbody2D>();
         _rb.linearDamping = normalDamping;
-
     }
 
 
@@ -34,6 +34,15 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+
+
+
+
+
+
+
+
         float speed = _rb.linearVelocity.magnitude;
 
         if (speed > velocityThreshold)
