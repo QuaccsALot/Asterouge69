@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using NUnit.Framework;
 using UnityEngine;
 using static UnityEngine.Rendering.DebugUI;
-using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEditor.MemoryProfiler;
 using UnityEditor.PackageManager.Requests;
@@ -48,7 +47,13 @@ public class ConnectionManager : MonoBehaviour
     [Header("(NO TOUCHY DURING GP) Exposed Statics - dictionary"), Space(23)]
     public List<powerUp> EXPO_powerUpDictionary = new List<powerUp>();
 
-    public bool testingFUCKYOU = false;
+    public bool shotgunTesting  = false;
+
+    public bool sniperTesting = false;
+
+    public bool bombTesting = false;
+
+    public bool breakTesting = false;
 
     //[Header("(NO TOUCHY DURING GP) Exposed Statics - current")]
 
@@ -149,11 +154,55 @@ public class ConnectionManager : MonoBehaviour
 
 
 
-        if (testingFUCKYOU)
+
+
+
+
+
+
+
+
+
+
+
+        #region Cheats
+
+        if (shotgunTesting)
         {
             ConnectionManager.AddPowerUp("shotgun");
-            testingFUCKYOU = false;
+            shotgunTesting = false;
+
+            OnSceneLoaded(SceneManager.GetActiveScene());
         }
+
+        if (sniperTesting)
+        {
+            ConnectionManager.AddPowerUp("sniper");
+            sniperTesting = false;
+
+            OnSceneLoaded(SceneManager.GetActiveScene());
+        }
+
+        if (bombTesting)
+        {
+            ConnectionManager.AddPowerUp("bomb");
+            bombTesting = false;
+
+            OnSceneLoaded(SceneManager.GetActiveScene());
+        }
+
+
+        if (breakTesting)
+        {
+            ConnectionManager.AddPowerUp("break");
+            breakTesting = false;
+
+            OnSceneLoaded(SceneManager.GetActiveScene());
+        }
+
+
+
+        #endregion
     }
 
 
@@ -165,7 +214,7 @@ public class ConnectionManager : MonoBehaviour
 
 
 
-    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    void OnSceneLoaded(Scene scene)
     {
         Debug.Log("Scene changed to: " + scene.name);
         if (scene.name != "Gameplay") return;
@@ -177,6 +226,8 @@ public class ConnectionManager : MonoBehaviour
             if (item.function_StartName != "")
             {
                 GameObject obj = GameObject.Find(item.objectName);
+                print(obj.transform.name);
+
                 obj.SendMessage(item.function_StartName);
 
                 print("Initialized: " + obj.name + " ability");

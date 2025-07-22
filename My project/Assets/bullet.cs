@@ -5,6 +5,7 @@ public class bullet : MonoBehaviour
     public float speed = 1f;
     public float lifeTime = .1f;
 
+    public bool unlimitedPierce = false;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -32,7 +33,7 @@ public class bullet : MonoBehaviour
 
     public void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Astroid"))
+        if (other.CompareTag("Astroid") && !unlimitedPierce)
         {
             gameObject.SetActive(false);
         }

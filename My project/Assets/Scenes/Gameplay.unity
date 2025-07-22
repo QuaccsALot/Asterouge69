@@ -358,6 +358,10 @@ PrefabInstance:
       propertyPath: prefab
       value: 
       objectReference: {fileID: 4428228911943723153, guid: fbc05b4d261abfa4bad20922ad1ac4d8, type: 3}
+    - target: {fileID: -2841167292133594245, guid: 385f31279f46d324b9604a2bdc08b34c, type: 3}
+      propertyPath: bombPrefab
+      value: 
+      objectReference: {fileID: 6056408757401283608, guid: 00ab99c0b7418a0468ae8479c1888d88, type: 3}
     - target: {fileID: 1802728970080474223, guid: 385f31279f46d324b9604a2bdc08b34c, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.2735066
@@ -1186,12 +1190,36 @@ MonoBehaviour:
   EXPO_powerUpDictionary:
   - name: shotgun
     rarity: 0
-    function_StartName: 
+    function_StartName: CM_shotgunStart
     function_UpdateName: CM_shotgunUpdate
     function_EndName: 
     objectName: Gun
-    price: 69420
-  testingFUCKYOU: 0
+    price: 0
+  - name: sniper
+    rarity: 0
+    function_StartName: CM_sniperStart
+    function_UpdateName: 
+    function_EndName: 
+    objectName: Gun
+    price: 0
+  - name: bomb
+    rarity: 0
+    function_StartName: CM_bombStart
+    function_UpdateName: 
+    function_EndName: 
+    objectName: Gun
+    price: 0
+  - name: break
+    rarity: 0
+    function_StartName: CM_breakStart
+    function_UpdateName: 
+    function_EndName: 
+    objectName: Gun
+    price: 0
+  shotgunTesting: 0
+  sniperTesting: 0
+  bombTesting: 0
+  breakTesting: 0
 --- !u!4 &1120363613
 Transform:
   m_ObjectHideFlags: 0
@@ -1548,7 +1576,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1832278986
 MonoBehaviour:
   m_ObjectHideFlags: 0
