@@ -720,6 +720,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1403563456}
+  respCount: 0
 --- !u!1 &740476422
 GameObject:
   m_ObjectHideFlags: 0
@@ -1347,11 +1348,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   turnSpeed: 350
-  forwardForce: 15
-  maxSpeed: 3
-  velocityThreshold: 3
-  normalDamping: 1
-  highDamping: 15
+  forwardForce: 65
+  maxSpeed: 55
   _rb: {fileID: 0}
   worldVelocity: {x: 0, y: 0}
   ResetEverything: 0
@@ -1873,7 +1871,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5397139074617772093, guid: b40eb8f31764e8d47ae6e7a1bf4e6fe7, type: 3}
       propertyPath: m_AngularDamping
-      value: 5
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5397139074617772093, guid: b40eb8f31764e8d47ae6e7a1bf4e6fe7, type: 3}
+      propertyPath: m_CollisionDetection
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8776730927003183345, guid: b40eb8f31764e8d47ae6e7a1bf4e6fe7, type: 3}
       propertyPath: m_LocalScale.x

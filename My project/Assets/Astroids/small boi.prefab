@@ -165,7 +165,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 969a47437afaded4893987287828058b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
+  speed: 3
   speedRandomization: 2
   positionRandomization: 5
   prefab: {fileID: 0}

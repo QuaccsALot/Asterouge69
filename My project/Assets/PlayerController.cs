@@ -9,9 +9,7 @@ public class PlayerController : MonoBehaviour
     public float forwardForce = 5f;
     public float maxSpeed = 5f;
 
-    public float velocityThreshold = 6f;
-    public float normalDamping = 5f;
-    public float highDamping = 3f;
+
 
 
     [Header("Debug")]
@@ -24,7 +22,6 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
-        _rb.linearDamping = normalDamping;
     }
 
 
@@ -38,45 +35,42 @@ public class PlayerController : MonoBehaviour
 
 
 
-
-
-
-
-
-        float speed = _rb.linearVelocity.magnitude;
-
-        if (speed > velocityThreshold)
-        {
-            _rb.linearDamping = highDamping;
-        }
-        else
-        {
-            _rb.linearDamping = normalDamping;
-        }
-
-
-
-
+            if (Input.GetKey(KeyCode.D))
+            {
+                transform.Rotate(0, 0, -Time.deltaTime * turnSpeed);
+            }
 
             if (Input.GetKey(KeyCode.RightArrow))
             {
                 transform.Rotate(0, 0, -Time.deltaTime * turnSpeed);
             }
 
+            if (Input.GetKey(KeyCode.A))
+            {
+                transform.Rotate(0, 0, Time.deltaTime * turnSpeed);
+            }
+
+
+
+            if (Input.GetKey(KeyCode.LeftArrow))
+            {
+                transform.Rotate(0, 0, Time.deltaTime * turnSpeed);
+            }
 
 
 
 
-        if (Input.GetKey(KeyCode.LeftArrow))
+
+
+        if (Input.GetKey(KeyCode.W))
         {
-            transform.Rotate(0, 0, Time.deltaTime * turnSpeed);
+            Vector2 localForward = transform.up;
+            localForward *= forwardForce;
+
+                worldVelocity.x += localForward.x * Time.deltaTime;
+                worldVelocity.y += localForward.y * Time.deltaTime;
         }
-
-
-
-
-
-
+        
         if (Input.GetKey(KeyCode.UpArrow))
         {
             Vector2 localForward = transform.up;
@@ -87,15 +81,25 @@ public class PlayerController : MonoBehaviour
         }
 
 
-        //worldVelocity = Vector2.ClampMagnitude(worldVelocity, maxSpeed); //clamp MaxSpeed
 
 
+
+
+        // Clamp the speed
+        worldVelocity = Vector2.ClampMagnitude(worldVelocity, maxSpeed);
+
+        // If not accelerating, apply damping
+        if (!Input.GetKey(KeyCode.W))
+        {
+            worldVelocity *= 0.98f;
+        }
+        if(!Input.GetKey(KeyCode.UpArrow))
+        {
+            worldVelocity = Vector2.Lerp(worldVelocity, Vector2.zero, Time.deltaTime * .03f); // "2f" controls speed of slowdown
+        }
+
+        // Apply the velocity to the Rigidbody
         _rb.linearVelocity = worldVelocity;
-
-
-
-
-
 
 
 
@@ -122,8 +126,6 @@ public class PlayerController : MonoBehaviour
         {
             gameObject.SetActive(false);
         }
-
-        
 
     }
 
