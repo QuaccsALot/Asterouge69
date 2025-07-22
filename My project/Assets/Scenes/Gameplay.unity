@@ -1376,8 +1376,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   turnSpeed: 350
-  forwardForce: 65
-  maxSpeed: 55
+  forwardForce: 50
+  maxSpeed: 40
   _rb: {fileID: 0}
   worldVelocity: {x: 0, y: 0}
   ResetEverything: 0

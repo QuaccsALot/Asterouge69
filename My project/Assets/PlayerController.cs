@@ -89,11 +89,11 @@ public class PlayerController : MonoBehaviour
         // If not accelerating, apply damping
         if (!Input.GetKey(KeyCode.W))
         {
-            worldVelocity = Vector2.Lerp(worldVelocity, Vector2.zero, Time.deltaTime * .03f); // "0f" controls speed of slowdown
+            worldVelocity = Vector2.Lerp(worldVelocity, Vector2.zero, Time.deltaTime * 1.5f); // "0f" controls speed of slowdown
         }
         if(!Input.GetKey(KeyCode.UpArrow))
         {
-            worldVelocity = Vector2.Lerp(worldVelocity, Vector2.zero, Time.deltaTime * .03f); // "0f" controls speed of slowdown
+            worldVelocity = Vector2.Lerp(worldVelocity, Vector2.zero, Time.deltaTime * 1.5f); // "0f" controls speed of slowdown
         }
 
         // Apply the velocity to the Rigidbody
