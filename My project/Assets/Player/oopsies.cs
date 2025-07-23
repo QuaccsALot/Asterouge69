@@ -65,10 +65,7 @@ public class oopsies : MonoBehaviour
             respCount++;
 
 
-<<<<<<< Updated upstream
-=======
 
->>>>>>> Stashed changes
             try
             {
                 Destroy(models[models.Count - 1]);

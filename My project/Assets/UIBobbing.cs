@@ -8,6 +8,7 @@ public class Bobbing : MonoBehaviour
     public float BaseX = 0f;
     public float BaseY = 0f;
     public float BaseZ = 0f;
+    public float BobIntsity = 1f;
     private float BobSeed = 0;
     void Start()
     {
@@ -21,6 +22,6 @@ public class Bobbing : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.position = new Vector3(BaseX, Mathf.Sin(Time.time + BobSeed) / 5 + BaseY, BaseZ); ;
+        transform.position = new Vector3(BaseX, (Mathf.Sin(Time.time + BobSeed) / 5)*BobIntsity + BaseY, BaseZ); ;
     }
 }
