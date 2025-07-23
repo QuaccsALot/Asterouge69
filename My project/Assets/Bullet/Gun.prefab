@@ -100,4 +100,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b76a05d32237fcd46aefd01bcef2a06e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
   prefab: {fileID: 0}
+  bombPrefab: {fileID: 0}
+  break_isOn: 0
+  break_slowDown: 0
+  speed: 1
+  lifetime: 0.2
+  timeToShoot: 0.25
+  unlimitedPierce: 0
+  modifiers: []
+  _rb: {fileID: 0}

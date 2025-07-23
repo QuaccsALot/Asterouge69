@@ -167,3 +167,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 1
   lifeTime: 0.15
+  unlimitedPierce: 0
