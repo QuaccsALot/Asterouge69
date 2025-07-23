@@ -41,7 +41,7 @@ public class ConnectionManager : MonoBehaviour
     public static ConnectionManager instance;
 
     [Header("NO TOUCHY, JUST FOR SHOW")]
-    public int EXPO_CURRENTscore = 0;
+    public int EXPO_CURRENTscore = 10000000;
     public List<powerUp> EXPO_CURRENTpowerUps = new List<powerUp>();
 
     [Header("(NO TOUCHY DURING GP) Exposed Statics - dictionary")]

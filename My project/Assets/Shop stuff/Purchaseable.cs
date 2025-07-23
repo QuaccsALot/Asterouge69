@@ -11,6 +11,7 @@ using Unity.VisualScripting.Antlr3.Runtime.Tree;
 using System.Runtime.CompilerServices;
 using Random = UnityEngine.Random;
 using UnityEditor.ShaderKeywordFilter;
+using UnityEngine.UI;
 
 public class Purchaseable : MonoBehaviour
 {
@@ -24,6 +25,7 @@ public class Purchaseable : MonoBehaviour
     public TMP_Text PriceText;
     public ParticleSystem CanBuyParts;
     public powerUp powerUpData;
+    public TMP_Text Signtext;
 
     [Header("private stuffs")] //not shown
     private float jiggleReducer = 0;
@@ -44,12 +46,16 @@ public class Purchaseable : MonoBehaviour
     void Start()
     {
         powerUpData = new powerUp();
+
         Transform parentTransform = transform.parent;
-        // PriceText = transform.parent.GetComponentInChildren<TMP_Text>();
+        Signtext = transform.parent.transform.parent.Find("sign text").GetComponent<TMP_Text>();
+        PriceText = transform.parent.GetComponentInChildren<TMP_Text>();
         basesizeX = transform.localScale.x;
         basesizeY = transform.localScale.y;
         if  (TopOrBottom)
-        { temprarity = Random.Range(9, 17); }
+        {
+            temprarity = Random.Range(9, 17);
+        }
         else
         { temprarity = Random.Range(0, 15); }
 
@@ -75,10 +81,6 @@ public class Purchaseable : MonoBehaviour
             print("3");
             powerUpData = ConnectionManager.GetRandomAbilOfRarity(3);
         }
-
-
-
-
 
         if (powerUpData.rarity is 0)
         {
@@ -110,7 +112,8 @@ public class Purchaseable : MonoBehaviour
 
         }
         PriceText.text = new string("$" + powerUpData.price);
-        CanBuyParts.startColor = new Color32(baseR, baseG, baseB, 20);
+
+        CanBuyParts.startColor = new Color32(baseR, baseG, baseB, 50);
         CanBuyParts.startLifetime = .5f;
         CanBuyParts.Play(true);
         PartsPlaying = true;
@@ -126,13 +129,15 @@ public class Purchaseable : MonoBehaviour
             ExpandedSize = ExpandedSize + 1;
             CanBuyParts.startLifetime = 1f;
             CanBuyParts.startColor = new Color32(baseR, baseG, baseB, 200);
+            //replace with the data of the name and description of the upgrade ----------------------------------<<<<< Check
+            Signtext.text = new string("" + powerUpData.price);//              ----------------------------------<<<<< Check
         }
 
     }
     private void OnMouseExit()
     {
         CanBuyParts.startLifetime = .5f;
-        CanBuyParts.startColor = new Color32(baseR, baseG, baseB, 100);
+        CanBuyParts.startColor = new Color32(baseR, baseG, baseB, 50);
     }
     //-----------------------------
     //purchase effects
