@@ -98,6 +98,7 @@ public class pewpew : MonoBehaviour
             timeSINCEShoot = 0;
 
             GameObject pewpew = CreateDefaultPewPew(0);
+            Audio.playaudio("Shoot");
 
         }
 
