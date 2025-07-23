@@ -12,16 +12,19 @@ public class PlayerController : MonoBehaviour
 
 
 
+
     [Header("Debug")]
+    public GameObject model;
     public Rigidbody2D _rb;
     public Vector2 worldVelocity;
     public bool ResetEverything = false;
-
+    public bool invinsible = false;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
+        model = GameObject.Find("Player Model");
     }
 
 
@@ -120,7 +123,7 @@ public class PlayerController : MonoBehaviour
 
     public void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Astroid"))
+        if (other.CompareTag("Astroid") && !invinsible)
         {
             gameObject.SetActive(false);
         }

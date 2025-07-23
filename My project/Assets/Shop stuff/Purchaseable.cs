@@ -45,7 +45,7 @@ public class Purchaseable : MonoBehaviour
     {
         powerUpData = new powerUp();
         Transform parentTransform = transform.parent;
-        PriceText = transform.parent.GetComponentInChildren<TMP_Text>();
+        // PriceText = transform.parent.GetComponentInChildren<TMP_Text>();
         basesizeX = transform.localScale.x;
         basesizeY = transform.localScale.y;
         if  (TopOrBottom)
@@ -53,22 +53,31 @@ public class Purchaseable : MonoBehaviour
         else
         { temprarity = Random.Range(0, 15); }
 
-                    if (temprarity <= 7)
-                    {
-                powerUpData = ConnectionManager.GetRandomAbilOfRarity(0);
-                    }
-                    else if (temprarity <= 12)
-                    {
-                powerUpData = ConnectionManager.GetRandomAbilOfRarity(1);
-            }
-                    else if (temprarity <= 15)
-                    {
-                powerUpData = ConnectionManager.GetRandomAbilOfRarity(2);
-            }
-                   else
-                   {
-                powerUpData = ConnectionManager.GetRandomAbilOfRarity(3);
-            }
+
+
+        if (temprarity <= 7)
+        {
+            print("0");
+            powerUpData = ConnectionManager.GetRandomAbilOfRarity(0);
+        }
+        else if (temprarity <= 12)
+        {
+            print("1");
+            powerUpData = ConnectionManager.GetRandomAbilOfRarity(1);
+        }
+        else if (temprarity <= 15)
+        {
+            print("2");
+            powerUpData = ConnectionManager.GetRandomAbilOfRarity(2);
+        }
+        else
+        {
+            print("3");
+            powerUpData = ConnectionManager.GetRandomAbilOfRarity(3);
+        }
+
+
+
 
 
         if (powerUpData.rarity is 0)
@@ -131,7 +140,7 @@ public class Purchaseable : MonoBehaviour
     {
         if (ConnectionManager.CURRENTscore >= powerUpData.price)
         {
-            ConnectionManager.SubtractScore(powerUpData.price);
+            ConnectionManager.AddPowerUp(powerUpData.name);
             Sold = true;
             CanBuyParts.Stop();
             PartsPlaying = false;
@@ -189,13 +198,13 @@ public class Purchaseable : MonoBehaviour
         if (!Canbuy)
         {
             CanBuyParts.Stop(true);
-            Debug.Log("suppose to stop parts");
+            // Debug.Log("suppose to stop parts");
             PartsPlaying = false;
         }
         else if (!PartsPlaying) 
         {
             CanBuyParts.Play(true);
-            Debug.Log("suppose to play parts");
+            // Debug.Log("suppose to play parts");
             PartsPlaying = true;
         }
         //-----------------------------

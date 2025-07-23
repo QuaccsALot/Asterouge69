@@ -44,10 +44,12 @@ public class ConnectionManager : MonoBehaviour
     public int EXPO_CURRENTscore = 0;
     public List<powerUp> EXPO_CURRENTpowerUps = new List<powerUp>();
 
-    [Header("(NO TOUCHY DURING GP) Exposed Statics - dictionary"), Space(23)]
+    [Header("(NO TOUCHY DURING GP) Exposed Statics - dictionary")]
     public List<powerUp> EXPO_powerUpDictionary = new List<powerUp>();
 
-    public bool shotgunTesting  = false;
+
+    [Header("Debug stuffs")]
+    public bool shotgunTesting = false;
 
     public bool sniperTesting = false;
 
@@ -92,6 +94,13 @@ public class ConnectionManager : MonoBehaviour
 
 
         PopulatePrice();
+
+
+
+        if (instance.EXPO_CURRENTscore != ConnectionManager.CURRENTscore)
+        {
+            CURRENTscore = instance.EXPO_CURRENTscore;
+        }
     }
 
 
@@ -136,8 +145,9 @@ public class ConnectionManager : MonoBehaviour
     {
         if (instance.EXPO_CURRENTscore != ConnectionManager.CURRENTscore)
         {
-            CURRENTscore = instance.EXPO_CURRENTscore;
+            instance.EXPO_CURRENTscore = CURRENTscore;
         }
+
 
         try
         {
@@ -309,6 +319,6 @@ public class ConnectionManager : MonoBehaviour
             }
         }
 
-        return name[Random.Range(0, name.Count - 1)];
+        return name[Random.Range(0, name.Count)];
     }
 }

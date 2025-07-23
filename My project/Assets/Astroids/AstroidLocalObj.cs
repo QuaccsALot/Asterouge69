@@ -1,5 +1,6 @@
 using System.Linq.Expressions;
 using System.Threading;
+using UnityEditor.MemoryProfiler;
 using UnityEngine;
 
 public class AstroidLocalObj : MonoBehaviour
@@ -7,6 +8,8 @@ public class AstroidLocalObj : MonoBehaviour
     public float speed = 15f;
     public float speedRandomization = 5f;
     public float positionRandomization = 50f;
+
+    public float randomSize;
 
 
     public GameObject prefab;
@@ -39,6 +42,8 @@ public class AstroidLocalObj : MonoBehaviour
     void Start()
     {
         setAstroid();
+
+        randomSize /= 2;
     }
 
 
@@ -59,21 +64,25 @@ public class AstroidLocalObj : MonoBehaviour
 
     void newFunc()
     {
-        GameObject nag = GameObject.Find("Sh!t ahh text");
-        score ger = nag.GetComponent<score>();
-        
-
         if (gameObject.name == "big boi(Clone)")
         {
-            ger.numba += 20;
+            // ger.numba += 20;
+            ConnectionManager.CURRENTscore += 20;
+            print("test");
         }
         if (gameObject.name == "medium boi(Clone)")
         {
-            ger.numba += 30;
+            // ger.numba += 30;
+            ConnectionManager.AddScore(30);
+            print("test2");
         }
         if (gameObject.name == "small boi(Clone)")
         {
-            ger.numba += 40;
+            // ger.numba += 40;
+            ConnectionManager.AddScore(40);
+            print("test3");
+
+
             GameObject yur = GameObject.Find("AstroidMaker");
             AstroidMakerScript yur2 = yur.GetComponent<AstroidMakerScript>();
             yur2.count += 1;
@@ -95,23 +104,26 @@ public class AstroidLocalObj : MonoBehaviour
 
             try
             {
-                GameObject var = Instantiate(prefab, transform.position, Quaternion.identity);
 
-                AstroidLocalObj var2 = var.GetComponent<AstroidLocalObj>();
+                for (int i = 0; i < 2; i++)
+                {
+                    GameObject newAstroid = Instantiate(prefab, transform.position, Quaternion.identity);
 
-                var2.speed = 3f;
+                    AstroidLocalObj scripts = newAstroid.GetComponent<AstroidLocalObj>();
 
-                var2.setAstroid();
+                    scripts.speed = 3f;
+
+                    scripts.setAstroid();
 
 
 
-                GameObject var3 = Instantiate(prefab, transform.position, Quaternion.identity);
+                    float randomScale = (Random.Range(-randomSize, randomSize) / 100) + 1;
+                    newAstroid.transform.localScale = new Vector3(newAstroid.transform.localScale.x * randomScale,
+                                                                newAstroid.transform.localScale.y * randomScale,
+                                                                newAstroid.transform.localScale.z * randomScale);
 
-                AstroidLocalObj var4 = var.GetComponent<AstroidLocalObj>();
-
-                var4.speed = 3f;
-
-                var4.setAstroid();
+                    
+                }
             } catch { }
 
 

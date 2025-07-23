@@ -7,22 +7,20 @@ public class score : MonoBehaviour
 {
     
     public int numba = 0;
-    
-    
+
+    private TMP_Text me;
     
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        me = GetComponent<TMP_Text>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        GameObject text = gameObject;
-        TMP_Text score = text.GetComponent<TMP_Text>();
-        score.text = "Score:" + numba;
+        me.text = "Score: " + ConnectionManager.CURRENTscore;
 
     }
 }

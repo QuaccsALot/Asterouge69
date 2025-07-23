@@ -9,7 +9,10 @@ public class bombCREATER : MonoBehaviour
     public GameObject prefab;
     public float forceForward = 5f;
     public float lifetime = .75f;
+    public float speed;
 
+
+    public GameObject pelletGameObject;
 
     [Header("Debug")]
     public float timeSINCEShoot = 0f;
@@ -36,7 +39,8 @@ public class bombCREATER : MonoBehaviour
 
         newnew.GetComponent<Rigidbody2D>().AddForce(new Vector3(0, 0, angle) * forceForward);
         newnew.GetComponent<bombLOCAL>().lifetime = lifetime;
-        newnew.GetComponent<bombLOCAL>().prefab = GetComponent<pewpew>().prefab;
+        newnew.GetComponent<bombLOCAL>().prefab = pelletGameObject;
+        newnew.GetComponent<bombLOCAL>().speed = speed;
 
         newnew.transform.parent = transform;
 
@@ -47,9 +51,7 @@ public class bombCREATER : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        // player = transform.root.gameObject;
-        player = GetComponent<pewpew>().player;
-        prefab = GetComponent<pewpew>().bombPrefab;
+        //all is initialized inside pewpew
     }
 
     // Update is called once per frame

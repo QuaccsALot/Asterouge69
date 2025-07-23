@@ -12,6 +12,8 @@ public class AstroidMakerScript : MonoBehaviour
     [SerializeField]
     private float forceAmount = 1;
 
+    [UnityEngine.Range(0, 100)] public float randomSize = 50f;
+
 
     [SerializeField]
     private GameObject prefab;
@@ -21,7 +23,7 @@ public class AstroidMakerScript : MonoBehaviour
     private float timeSinceSpawn = 0;
 
     public int count = 0;
-    
+
 
 
 
@@ -66,7 +68,22 @@ public class AstroidMakerScript : MonoBehaviour
 
 
         GameObject newAstroid = Instantiate(prefab, newPos, Quaternion.identity);
-    }
+
+
+
+
+
+
+
+        float randomScale = (Random.Range(-randomSize, randomSize) / 100) + 1;
+        newAstroid.transform.localScale = new Vector3(newAstroid.transform.localScale.x * randomScale,
+                                                      newAstroid.transform.localScale.y * randomScale,
+                                                      newAstroid.transform.localScale.z * randomScale);
+
+
+
+        newAstroid.GetComponent<AstroidLocalObj>().randomSize = randomSize;
+    } 
 
 
 
