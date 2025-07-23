@@ -62,8 +62,14 @@ public class oopsies : MonoBehaviour
             currentState = "invincible";
             respCount++;
 
-            Destroy(models[models.Count - 1]);
-            models.RemoveAt(models.Count - 1);
+
+            try
+            {
+                Destroy(models[models.Count - 1]);
+                models.RemoveAt(models.Count - 1);
+            }
+            catch { }
+            
         }
 
 

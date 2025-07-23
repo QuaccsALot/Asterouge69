@@ -1931,7 +1931,7 @@ MonoBehaviour:
   - {x: -12, y: 7.83, z: 0}
   - {x: 12, y: -7.83, z: 0}
   forceAmount: 1
-  randomSize: 50
+  randomSize: 15
   prefab: {fileID: 3119300005067457361, guid: f71480f067853f445bcc55c00e075033, type: 3}
   timeSinceSpawn: 0
   count: 0

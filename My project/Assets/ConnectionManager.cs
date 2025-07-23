@@ -148,6 +148,15 @@ public class ConnectionManager : MonoBehaviour
             instance.EXPO_CURRENTscore = CURRENTscore;
         }
 
+        if (SceneManager.GetActiveScene().name != "GameOver" || SceneManager.GetActiveScene().name != "Main Menu")
+        {
+            needToInitializePowerUps.Clear();
+            CURRENTpowerUps.Clear();
+
+            CURRENTscore = 0;
+        }
+
+
 
         try
         {
@@ -156,6 +165,9 @@ public class ConnectionManager : MonoBehaviour
                 if (item.function_UpdateName != "")
                 {
                     GameObject obj = GameObject.Find(item.objectName);
+                    print("asdfjkl;" + obj.name);
+
+                    print("adsfjkl;" + item.function_UpdateName);
                     obj.SendMessage(item.function_UpdateName);
                 }
             }
@@ -227,22 +239,28 @@ public class ConnectionManager : MonoBehaviour
     void OnSceneLoaded(Scene scene)
     {
         Debug.Log("Scene changed to: " + scene.name);
-        if (scene.name != "Gameplay") return;
-
-
-
-        foreach (var item in needToInitializePowerUps)
+        if (scene.name != "Gameplay")
         {
-            if (item.function_StartName != "")
-            {
-                GameObject obj = GameObject.Find(item.objectName);
-                print(obj.transform.name);
-
-                obj.SendMessage(item.function_StartName);
-
-                print("Initialized: " + obj.name + " ability");
-            }
+            return;
         }
+
+
+        try
+            {
+                foreach (var item in needToInitializePowerUps)
+                {
+                    if (item.function_StartName != "")
+                    {
+                        GameObject obj = GameObject.Find(item.objectName);
+                        print(obj.transform.name);
+
+                        obj.SendMessage(item.function_StartName);
+
+                        print("Initialized: " + obj.name + " ability");
+                    }
+                }
+            }
+            catch { }
 
         needToInitializePowerUps.Clear();
     }
