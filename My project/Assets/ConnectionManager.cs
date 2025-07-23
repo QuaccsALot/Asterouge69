@@ -143,12 +143,8 @@ public class ConnectionManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (instance.EXPO_CURRENTscore != ConnectionManager.CURRENTscore)
-        {
-            instance.EXPO_CURRENTscore = CURRENTscore;
-        }
 
-        if (SceneManager.GetActiveScene().name != "GameOver" || SceneManager.GetActiveScene().name != "Main Menu")
+        if (SceneManager.GetActiveScene().name == "GameOver" || SceneManager.GetActiveScene().name == "Main Menu")
         {
             needToInitializePowerUps.Clear();
             CURRENTpowerUps.Clear();
@@ -240,8 +236,6 @@ public class ConnectionManager : MonoBehaviour
     {
         Debug.Log("Scene changed to: " + scene.name);
         if (scene.name != "Gameplay")
-<<<<<<< Updated upstream
-=======
         {
 
             return;
@@ -256,7 +250,6 @@ public class ConnectionManager : MonoBehaviour
 
 
         foreach (var item in needToInitializePowerUps)
->>>>>>> Stashed changes
         {
             return;
         }

@@ -52,7 +52,9 @@ public class bombLOCAL : MonoBehaviour
             item.transform.parent = null;
         }
 
-        Destroy(gameObject); // Destroy the GameObject this script is attached to
+        Audio.playaudio("bomb");
+
+        Destroy(gameObject); // Destroy the GameObject this script is attached to   
     }
 
 

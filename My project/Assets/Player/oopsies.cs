@@ -53,6 +53,8 @@ public class oopsies : MonoBehaviour
 
         if (player.active == false)
         {
+            Audio.playaudio("death");
+
             print("respawned");
             player.SetActive(true);
             playerController.invinsible = true;
@@ -63,20 +65,12 @@ public class oopsies : MonoBehaviour
             respCount++;
 
 
-<<<<<<< Updated upstream
-=======
-
->>>>>>> Stashed changes
             try
             {
                 Destroy(models[models.Count - 1]);
                 models.RemoveAt(models.Count - 1);
             }
             catch { }
-<<<<<<< Updated upstream
-            
-=======
->>>>>>> Stashed changes
         }
 
 
