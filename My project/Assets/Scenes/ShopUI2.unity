@@ -6405,7 +6405,7 @@ MonoBehaviour:
   BaseX: 0
   BaseY: 0
   BaseZ: 0
-  BobIntsity: 1
+  BobIntsity: 0.5
 --- !u!1 &896887103
 GameObject:
   m_ObjectHideFlags: 0
