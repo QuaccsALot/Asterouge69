@@ -130,7 +130,7 @@ public class Purchaseable : MonoBehaviour
             CanBuyParts.startLifetime = 1f;
             CanBuyParts.startColor = new Color32(baseR, baseG, baseB, 200);
             //replace with the data of the name and description of the upgrade ----------------------------------<<<<< Check
-            Signtext.text = new string("" + powerUpData.price);//              ----------------------------------<<<<< Check
+            Signtext.text = new string("" + powerUpData.name);//              ----------------------------------<<<<< Check
         }
 
     }
