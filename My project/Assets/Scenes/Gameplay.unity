@@ -400,7 +400,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1802728970080474223, guid: 385f31279f46d324b9604a2bdc08b34c, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.15072627
+      value: 0.17610858
       objectReference: {fileID: 0}
     - target: {fileID: 1802728970080474223, guid: 385f31279f46d324b9604a2bdc08b34c, type: 3}
       propertyPath: m_LocalScale.z
@@ -412,7 +412,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1802728970080474223, guid: 385f31279f46d324b9604a2bdc08b34c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.68873864
+      value: 0.7014
       objectReference: {fileID: 0}
     - target: {fileID: 1802728970080474223, guid: 385f31279f46d324b9604a2bdc08b34c, type: 3}
       propertyPath: m_LocalPosition.z
@@ -450,7 +450,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gun
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5137038897619059064, guid: 385f31279f46d324b9604a2bdc08b34c, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -526,7 +527,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Score: 6942'
+  m_text: 'Score: 69420'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -553,7 +554,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 28.7
+  m_fontSize: 26
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -687,7 +688,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0.106918216, g: 0.106918216, b: 0.106918216, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -1350,7 +1351,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b61b56f5a580e0841b712e9b0f83d9f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EXPO_CURRENTscore: 10000
+  EXPO_CURRENTscore: 0
   EXPO_CURRENTpowerUps: []
   EXPO_powerUpDictionary:
   - name: shotgun
@@ -1528,26 +1529,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8776730927003183345, guid: b40eb8f31764e8d47ae6e7a1bf4e6fe7, type: 3}
   m_PrefabInstance: {fileID: 5766731335144259959}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1403563462
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1403563456}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 71de1d38a8fa5f748ab735424a8bcca3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  turnSpeed: 350
-  forwardForce: 50
-  maxSpeed: 40
-  model: {fileID: 0}
-  _rb: {fileID: 0}
-  worldVelocity: {x: 0, y: 0}
-  ResetEverything: 0
-  invinsible: 0
 --- !u!114 &1403563465
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1567,6 +1548,26 @@ MonoBehaviour:
   playerModel: {fileID: 0}
   state: no move
   timer: 0
+--- !u!114 &1403563468
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1403563456}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71de1d38a8fa5f748ab735424a8bcca3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  turnSpeed: 350
+  forwardForce: 50
+  maxSpeed: 40
+  model: {fileID: 0}
+  _rb: {fileID: 0}
+  worldVelocity: {x: 0, y: 0}
+  ResetEverything: 0
+  invinsible: 0
 --- !u!1 &1435884838
 GameObject:
   m_ObjectHideFlags: 0
@@ -2339,10 +2340,10 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 638733092654818346, guid: b40eb8f31764e8d47ae6e7a1bf4e6fe7, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1403563462}
+      addedObject: {fileID: 1403563465}
     - targetCorrespondingSourceObject: {fileID: 638733092654818346, guid: b40eb8f31764e8d47ae6e7a1bf4e6fe7, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1403563465}
+      addedObject: {fileID: 1403563468}
   m_SourcePrefab: {fileID: 100100000, guid: b40eb8f31764e8d47ae6e7a1bf4e6fe7, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

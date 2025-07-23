@@ -240,6 +240,23 @@ public class ConnectionManager : MonoBehaviour
     {
         Debug.Log("Scene changed to: " + scene.name);
         if (scene.name != "Gameplay")
+<<<<<<< Updated upstream
+=======
+        {
+
+            return;
+        }
+
+
+        if (scene.name != "GameOver" || scene.name != "Main Menus")
+        {
+
+            return;
+        }
+
+
+        foreach (var item in needToInitializePowerUps)
+>>>>>>> Stashed changes
         {
             return;
         }
