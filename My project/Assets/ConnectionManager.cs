@@ -79,6 +79,7 @@ public class ConnectionManager : MonoBehaviour
     public static int ADDpierce = 0;
     public static float lifetimeMult = 1;
     public static float scaleMult = 1;
+    public static float SpeedMult = 1;
 
     private pewpew pewpewRef;
 
@@ -122,6 +123,10 @@ public class ConnectionManager : MonoBehaviour
 
         // Get all public instance field
         pewpewRef = GameObject.Find("Gun").GetComponent<pewpew>();
+
+
+
+        SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
 
@@ -188,9 +193,9 @@ public class ConnectionManager : MonoBehaviour
                 if (item.function_UpdateName != "")
                 {
                     GameObject obj = GameObject.Find(item.objectName);
-                    print("asdfjkl;" + obj.name);
+                    print("tried to do UpdateLoop: " + item.function_StartName + " on obj; " + item.objectName);
 
-                    print("adsfjkl;" + item.function_UpdateName);
+                    //print("adsfjkl;" + item.function_UpdateName);
                     obj.SendMessage(item.function_UpdateName);
                 }
             }
@@ -198,12 +203,6 @@ public class ConnectionManager : MonoBehaviour
         catch { }
 
 
-
-
-        pewpewRef.ADDpierce = ADDpierce;
-        pewpewRef.lifetimeMult = lifetimeMult;
-        pewpewRef.scaleMult = scaleMult;
-    
 
         
 
@@ -221,7 +220,7 @@ public class ConnectionManager : MonoBehaviour
             ConnectionManager.AddPowerUp("shotgun");
             shotgunTesting = false;
 
-            OnSceneLoaded(SceneManager.GetActiveScene());
+            OnSceneLoaded(SceneManager.GetActiveScene(), LoadSceneMode.Single);
         }
 
         if (sniperTesting)
@@ -229,7 +228,7 @@ public class ConnectionManager : MonoBehaviour
             ConnectionManager.AddPowerUp("sniper");
             sniperTesting = false;
 
-            OnSceneLoaded(SceneManager.GetActiveScene());
+            OnSceneLoaded(SceneManager.GetActiveScene(), LoadSceneMode.Single);
         }
 
         if (bombTesting)
@@ -237,7 +236,7 @@ public class ConnectionManager : MonoBehaviour
             ConnectionManager.AddPowerUp("bomb");
             bombTesting = false;
 
-            OnSceneLoaded(SceneManager.GetActiveScene());
+            OnSceneLoaded(SceneManager.GetActiveScene(), LoadSceneMode.Single);
         }
 
 
@@ -246,7 +245,7 @@ public class ConnectionManager : MonoBehaviour
             ConnectionManager.AddPowerUp("break");
             breakTesting = false;
 
-            OnSceneLoaded(SceneManager.GetActiveScene());
+            OnSceneLoaded(SceneManager.GetActiveScene(), LoadSceneMode.Single);
         }
 
 
@@ -263,8 +262,28 @@ public class ConnectionManager : MonoBehaviour
 
 
 
-    void OnSceneLoaded(Scene scene)
+
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        print("ima gummy bear");
+
+
+        if (scene.name == "GameOver" || scene.name == "Main Menus")
+        {
+            CURRENTpowerUps.Clear();
+            CURRENTscore = 0;
+            needToInitializePowerUps.Clear();
+
+
+            return;
+        }
+
+
+
+
+
+
+
         Debug.Log("Scene changed to: " + scene.name);
         if (scene.name != "Gameplay")
         {
@@ -273,17 +292,17 @@ public class ConnectionManager : MonoBehaviour
         }
 
 
-        if (scene.name != "GameOver" || scene.name != "Main Menus")
-        {
 
-            return;
+
+
+
+
+        if (scene.name == "Gameplay")
+        {
+            pewpewRef = GameObject.Find("Gun").GetComponent<pewpew>();
         }
 
-
-        foreach (var item in needToInitializePowerUps)
-        {
-            return;
-        }
+        print("its fan");
 
 
         try
@@ -303,6 +322,26 @@ public class ConnectionManager : MonoBehaviour
             }
             catch { }
 
+
+
+
+
+        try
+        {
+            foreach (var item in CURRENTpowerUps)
+            {
+                if (item.function_StartName != "")
+                {
+                    GameObject obj = GameObject.Find(item.objectName);
+                    print(obj.transform.name);
+
+                    obj.SendMessage(item.function_StartName);
+
+                    print("Initialized: " + obj.name + " ability");
+                }
+            }
+        }
+        catch { }
         needToInitializePowerUps.Clear();
     }
 
@@ -339,6 +378,8 @@ public class ConnectionManager : MonoBehaviour
         SubtractScore(new_powerUpData.price);
 
         ConnectionManager.needToInitializePowerUps.Add(new_powerUpData);
+
+        print(new_powerUpData.name);
     }
 
 

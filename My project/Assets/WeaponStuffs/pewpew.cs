@@ -11,7 +11,6 @@ public class pewpew : MonoBehaviour
 
     [Space(50)]
     public float shotgun_speedMult = .5f;
-    public float shotgun_lifetimeMult = .4f;
 
     [Space(50)]
     public float sniper_lifetimeMult = 3f;
@@ -46,16 +45,12 @@ public class pewpew : MonoBehaviour
     private Dictionary<string, object>  initialPewPew;
 
 
-    [Header("OTHER STUFFS")]
-    public  int ADDpierce = 0;
-    public  float lifetimeMult = 1;
-    public  float scaleMult = 1;
 
 
 
 
 
-    void Start()
+    void Awake()
     {
         initialPewPew = new Dictionary<string, object>();
         
@@ -84,11 +79,11 @@ public class pewpew : MonoBehaviour
 
 
         newnew.GetComponent<bullet>().speed = speed;
-        newnew.GetComponent<bullet>().lifeTime = lifetime * lifetimeMult;
+        newnew.GetComponent<bullet>().lifeTime = lifetime * ConnectionManager.lifetimeMult;
         newnew.GetComponent<bullet>().unlimitedPierce = unlimitedPierce;
-        newnew.GetComponent<bullet>().pierce += ADDpierce;
-
-        newnew.transform.localScale *= scaleMult;
+        newnew.GetComponent<bullet>().pierce += ConnectionManager.ADDpierce;
+        speed = speed * ConnectionManager.SpeedMult;
+        newnew.transform.localScale *= ConnectionManager.scaleMult;
 
 
         return newnew;
@@ -103,7 +98,7 @@ public class pewpew : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && timeSINCEShoot >= timeToShoot)
+        if (Input.GetKey(KeyCode.Space) && timeSINCEShoot >= timeToShoot)
         {
             timeSINCEShoot = 0;
 
@@ -134,18 +129,17 @@ public class pewpew : MonoBehaviour
 
 
 
-    void CM_shotgunStart()
+    public void CM_shotgunStart()
     {
         speed *= shotgun_speedMult;
-        lifetime *= shotgun_lifetimeMult;
     }
 
 
 
 
-    void CM_shotgunUpdate()
+    public void CM_shotgunUpdate()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKey(KeyCode.Space) && timeSINCEShoot >= timeToShoot)
         {
             CreateDefaultPewPew(30f);
             CreateDefaultPewPew(-30f);
@@ -158,8 +152,6 @@ public class pewpew : MonoBehaviour
         speed = (float)initialPewPew["speed"];
         speed *= shotgun_speedMult;
 
-        lifetime = (float)initialPewPew["lifetime"];
-        lifetime *= shotgun_lifetimeMult;
     }
 
 
@@ -180,7 +172,7 @@ public class pewpew : MonoBehaviour
 
 
 
-    void CM_sniperStart()
+    public void CM_sniperStart()
     {
         lifetime = (float)initialPewPew["lifetime"];
         lifetime *= sniper_lifetimeMult;
@@ -198,7 +190,7 @@ public class pewpew : MonoBehaviour
 
 
 
-    void CM_sniperUpdate()
+    public void CM_sniperUpdate()
     {
         ////TO DO: THIS WILL BREAK THINGS FOR SNIPER + SHOTGUN, ONLY FOR TESTING!!!
 
@@ -224,9 +216,18 @@ public class pewpew : MonoBehaviour
 
 
 
-    void CM_bombStart()
+    public void CM_bombStart()
     {
+        if (GetComponent<bombCREATER>() != null)
+        {
+            return;
+
+            //gameObject.AddComponent<Bombmaker>();
+        }
+
+
         bombCREATER bomb = gameObject.AddComponent(typeof(bombCREATER)) as bombCREATER;
+        print("UwU x3 nuzzles");
         bomb.prefab = bomb_prefab;
         bomb.player = player;
         bomb.pelletGameObject = pelletPrefab;
@@ -244,7 +245,7 @@ public class pewpew : MonoBehaviour
     }
 
 
-    void CM_bombUpdate()
+    public void CM_bombUpdate()
     {
         bombCREATER bomb = GetComponent<bombCREATER>();
         bomb.timeToShoot = bomb_timeToShoot;
@@ -271,7 +272,7 @@ public class pewpew : MonoBehaviour
 
 
 
-    void CM_breakStart()
+    public void CM_breakStart()
     {
         break_isOn = true;
         _rb = transform.root.GetComponent<Rigidbody2D>();

@@ -786,7 +786,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18b801cf8156630419b1f5dca734688c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  connectionManager: {fileID: 1120363612}
+  connectionManager: {fileID: 0}
 --- !u!1 &545120688
 GameObject:
   m_ObjectHideFlags: 0
@@ -1381,7 +1381,7 @@ Transform:
   - {fileID: 1435884839}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1120363611
+--- !u!1 &1235353718
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1389,8 +1389,8 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1120363613}
-  - component: {fileID: 1120363612}
+  - component: {fileID: 1235353720}
+  - component: {fileID: 1235353719}
   m_Layer: 0
   m_Name: ConnectionManager
   m_TagString: Untagged
@@ -1398,13 +1398,13 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1120363612
+--- !u!114 &1235353719
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1120363611}
+  m_GameObject: {fileID: 1235353718}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b61b56f5a580e0841b712e9b0f83d9f9, type: 3}
@@ -1434,7 +1434,7 @@ MonoBehaviour:
   - name: bomb
     rarity: 2
     shownName: Bomb
-    summary: (Press F)
+    summary: (Press F) to place powerfull bombs that explode into bullets!
     function_StartName: CM_bombStart
     function_UpdateName: CM_bombUpdate
     function_EndName: 
@@ -1453,13 +1453,13 @@ MonoBehaviour:
   sniperTesting: 0
   bombTesting: 0
   breakTesting: 0
---- !u!4 &1120363613
+--- !u!4 &1235353720
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1120363611}
+  m_GameObject: {fileID: 1235353718}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -6.342331, y: 2.5597692, z: -0.18667905}
@@ -1864,7 +1864,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9abfda89dd654de46b120e156b7d70df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeToShop: 59
+  timeToShop: 15
   timeText: {fileID: 1573270286}
 --- !u!114 &1573270286
 MonoBehaviour:
@@ -2423,6 +2423,6 @@ SceneRoots:
   - {fileID: 1832278987}
   - {fileID: 1936848923}
   - {fileID: 188535632}
-  - {fileID: 1120363613}
   - {fileID: 839969077}
   - {fileID: 545120690}
+  - {fileID: 1235353720}

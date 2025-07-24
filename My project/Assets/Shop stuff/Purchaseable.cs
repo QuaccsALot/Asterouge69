@@ -32,6 +32,11 @@ public class Purchaseable : MonoBehaviour
     private float ExpandedSize = 0;
     private float basesizeX = 0;
     private float basesizeY = 0;
+    private float SizeMult = 0;
+    private int PierceAdd = 0;
+    private float LifeMult = 0;
+    private float SpeedMult = 0;
+    private bool AbilityOrBoost = false;
     byte baseR = 0;
     byte baseG = 0;
     byte baseB = 0;
@@ -39,6 +44,7 @@ public class Purchaseable : MonoBehaviour
     private bool Sold = false;
     private bool PartsPlaying = false;
     public int temprarity = 0;
+    private int temprarity2 = 0;
 
 
 
@@ -46,6 +52,23 @@ public class Purchaseable : MonoBehaviour
     void Start()
     {
         powerUpData = new powerUp();
+
+        int rand = Random.Range(0, 2);
+        switch (rand)
+        {
+            case 0:
+                AbilityOrBoost = false;
+                break;
+
+            case 1:
+                AbilityOrBoost = true;
+                break;
+
+            default:
+                Debug.LogError("YOOOO I FUCKED IT");
+                break;
+        }
+
 
         Transform parentTransform = transform.parent;
         Signtext = transform.parent.transform.parent.Find("sign text").GetComponent<TMP_Text>();
@@ -63,47 +86,78 @@ public class Purchaseable : MonoBehaviour
 
         if (temprarity <= 7)
         {
-            print("0");
-            powerUpData = ConnectionManager.GetRandomAbilOfRarity(0);
+
+            if (AbilityOrBoost)
+            {
+                powerUpData = ConnectionManager.GetRandomAbilOfRarity(0);
+            }
+            else {
+                SpeedMult = .2f;
+                LifeMult = .5f;
+            }
+            temprarity2 = 0;
         }
         else if (temprarity <= 12)
         {
-            print("1");
-            powerUpData = ConnectionManager.GetRandomAbilOfRarity(1);
+            if (AbilityOrBoost)
+            {
+                powerUpData = ConnectionManager.GetRandomAbilOfRarity(1);
+            }
+            else { SizeMult = .5f; }
+            temprarity2 = 1;
         }
         else if (temprarity <= 15)
         {
-            print("2");
-            powerUpData = ConnectionManager.GetRandomAbilOfRarity(2);
+            if (AbilityOrBoost)
+            {
+                print("69420 = 67");
+                powerUpData = ConnectionManager.GetRandomAbilOfRarity(2);
+            }
+            else {
+                SpeedMult = .3f;
+                PierceAdd = 1;
+            }
+            temprarity2 = 2;
         }
         else
         {
-            print("3");
-            powerUpData = ConnectionManager.GetRandomAbilOfRarity(3);
+            if (AbilityOrBoost)
+            {
+                powerUpData = ConnectionManager.GetRandomAbilOfRarity(3);
+            }
+            else
+            {
+                SpeedMult = .2f;
+                LifeMult = .25f;
+                SizeMult = .5f;
+                PierceAdd = 1;
+                
+            }
+            temprarity2 = 3;
         }
 
-        if (powerUpData.rarity is 0)
+        if (temprarity2 is 0)
         {
             baseR = 136;
             baseG = 255;
             baseB = 0;
             powerUpData.price = 4000;
         }
-        else if (powerUpData.rarity is 1)
+        else if (temprarity2 is 1)
         {
             baseR = 0;
             baseG = 215;
             baseB = 255;
             powerUpData.price = 6000;
         }
-        else if (powerUpData.rarity is 2)
+        else if (temprarity2 is 2)
         {
             baseR = 170;
             baseG = 0;
             baseB = 255;
             powerUpData.price = 9000;
         }
-        else if (powerUpData.rarity is 3)
+        else if (temprarity2 is 3)
         {
             baseR = 255;
             baseG = 170;
@@ -129,8 +183,11 @@ public class Purchaseable : MonoBehaviour
             ExpandedSize = ExpandedSize + 1;
             CanBuyParts.startLifetime = 1f;
             CanBuyParts.startColor = new Color32(baseR, baseG, baseB, 200);
-            //replace with the data of the name and description of the upgrade ----------------------------------<<<<< Check
-            Signtext.text = new string("" + powerUpData.name);//              ----------------------------------<<<<< Check
+            if (AbilityOrBoost) { Signtext.text = new string("" + powerUpData.name + " - " + powerUpData.summary); }
+            else
+            {
+                Signtext.text = new string("+" + SizeMult +"X Bullet Size,   +" + LifeMult + "X Bullet Lifetime,   +" + SpeedMult + "X Bullet Speed,   +"+ PierceAdd + " Pierce" );
+            }
         }
 
     }
@@ -145,38 +202,22 @@ public class Purchaseable : MonoBehaviour
     {
         if (ConnectionManager.CURRENTscore >= powerUpData.price)
         {
-            ConnectionManager.AddPowerUp(powerUpData.name);
+            if (AbilityOrBoost) 
+            { 
+                ConnectionManager.AddPowerUp(powerUpData.name);
+            }
+            else
+            {
+                ConnectionManager.ADDpierce = ConnectionManager.ADDpierce + PierceAdd;
+                ConnectionManager.lifetimeMult = ConnectionManager.lifetimeMult + LifeMult;
+                ConnectionManager.scaleMult = ConnectionManager.scaleMult + SizeMult;
+                ConnectionManager.SpeedMult = ConnectionManager.SpeedMult + SpeedMult;
+            }
+
             Sold = true;
             CanBuyParts.Stop();
             PartsPlaying = false;
             PriceText.text = "SOLD";
-
-            #region
-            //The upgrade traits
-            //Globalstats.Atkspeed = (Globalstats.Atkspeed + AtkSpeedAdded) * AtkSpeedMult;
-            //Globalstats.Damage = (Globalstats.Damage + DamageAdded) * DamageMult;
-            //Globalstats.Speed = (Globalstats.Speed + SpeedAdded);
-            //Globalstats.Range = Globalstats.Range + RangeAdded;
-            ////-----------------------------
-            ////applies Special upgrade tags
-            //if (SpecialUpgrade is 1)
-            //{
-            //    Globalstats.SpecialUp1 = true;
-            //}
-            //else if (SpecialUpgrade is 2)
-            //{
-            //    Globalstats.SpecialUp2 = true;
-            //}
-            //else if (SpecialUpgrade is 3)
-            //{
-            //    Globalstats.SpecialUp3 = true;
-            //}
-            //else if (SpecialUpgrade is 4)
-            //{
-            //    Globalstats.SpecialUp4 = true;
-            //}
-            //-----------------------------
-            #endregion
 
             print("bought");
         }

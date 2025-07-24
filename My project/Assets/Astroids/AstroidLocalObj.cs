@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Threading;
 using UnityEditor.MemoryProfiler;
@@ -14,6 +15,7 @@ public class AstroidLocalObj : MonoBehaviour
 
     public GameObject prefab;
 
+    private List<GameObject> excludedBullets = new List<GameObject>();
 
 
 
@@ -91,14 +93,29 @@ public class AstroidLocalObj : MonoBehaviour
     }
 
 
+    bool isHeExist(GameObject person)
+    {
+        bool isHeExist = true;
 
-
-
-        public void OnTriggerEnter2D(Collider2D other)
+        foreach (var item in excludedBullets)
         {
-
-            if (other.CompareTag("Bullet"))
+            try
             {
+                if (item == person) isHeExist = false; break;
+            }
+            catch { }
+        }
+
+
+        return isHeExist;
+    }
+
+
+    public void OnTriggerEnter2D(Collider2D other)
+    {
+
+        if (other.CompareTag("Bullet") && isHeExist(other.gameObject))
+        {
             newFunc();
 
 
@@ -115,6 +132,8 @@ public class AstroidLocalObj : MonoBehaviour
 
                     scripts.setAstroid();
 
+                    scripts.excludedBullets = excludedBullets;
+
 
 
                     float randomScale = (Random.Range(-randomSize, randomSize) / 100) + 1;
@@ -127,12 +146,12 @@ public class AstroidLocalObj : MonoBehaviour
             } catch { }
 
 
-
+            excludedBullets.Add(other.gameObject);
 
 
             Destroy(gameObject);
 
-            }
+        }
             
 
 
@@ -145,7 +164,7 @@ public class AstroidLocalObj : MonoBehaviour
 
 
 
-        }
+    }
 
 
 
