@@ -105,6 +105,8 @@ public class pewpew : MonoBehaviour
             GameObject pewpew = CreateDefaultPewPew(0);
             Audio.playaudio("Shoot");
 
+
+            SceenShake.ScreenShake(-1);
         }
 
 

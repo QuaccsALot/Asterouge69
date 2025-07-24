@@ -43,7 +43,6 @@ public class ConnectionManager : MonoBehaviour
     public static ConnectionManager instance;
 
     [Header("NO TOUCHY, JUST FOR SHOW")]
-    public int EXPO_CURRENTscore = 10000000;
     public List<powerUp> EXPO_CURRENTpowerUps = new List<powerUp>();
 
     [Header("(NO TOUCHY DURING GP) Exposed Statics - dictionary")]
@@ -71,7 +70,7 @@ public class ConnectionManager : MonoBehaviour
     [Header("Statics")] //NotShown!
     public static List<powerUp> powerUpDictionary = new List<powerUp>();
     public static List<powerUp> CURRENTpowerUps = new List<powerUp>();
-    public static int CURRENTscore = 0;
+    public static int CURRENTscore;
     public static List<powerUp> needToInitializePowerUps = new List<powerUp>();
 
 
@@ -108,10 +107,10 @@ public class ConnectionManager : MonoBehaviour
 
 
 
-        if (instance.EXPO_CURRENTscore != ConnectionManager.CURRENTscore)
-        {
-            CURRENTscore = instance.EXPO_CURRENTscore;
-        }
+        // if (instance.EXPO_CURRENTscore != ConnectionManager.CURRENTscore)
+        // {
+        //     CURRENTscore = instance.EXPO_CURRENTscore;
+        // }
 
 
 

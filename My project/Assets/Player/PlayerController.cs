@@ -125,6 +125,8 @@ public class PlayerController : MonoBehaviour
     {
         if (other.CompareTag("Astroid") && !invinsible)
         {
+            SceenShake.ScreenShake(-1);
+
             gameObject.SetActive(false);
         }
 
