@@ -619,6 +619,7 @@ GameObject:
   - component: {fileID: 519420029}
   - component: {fileID: 519420030}
   - component: {fileID: 519420033}
+  - component: {fileID: 519420034}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -773,6 +774,19 @@ MonoBehaviour:
   baseColor:
     serializedVersion: 2
     rgba: 0
+--- !u!114 &519420034
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519420028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18b801cf8156630419b1f5dca734688c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  connectionManager: {fileID: 1120363612}
 --- !u!1 &545120688
 GameObject:
   m_ObjectHideFlags: 0
@@ -1396,11 +1410,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b61b56f5a580e0841b712e9b0f83d9f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EXPO_CURRENTscore: 0
+  EXPO_CURRENTscore: 99999
   EXPO_CURRENTpowerUps: []
   EXPO_powerUpDictionary:
   - name: shotgun
     rarity: 0
+    shownName: Shotgun
+    summary: Shoots multiple bullets
     function_StartName: CM_shotgunStart
     function_UpdateName: CM_shotgunUpdate
     function_EndName: 
@@ -1408,6 +1424,8 @@ MonoBehaviour:
     price: 0
   - name: sniper
     rarity: 1
+    shownName: Sniper
+    summary: More powerful shots, less quick though!
     function_StartName: CM_sniperStart
     function_UpdateName: CM_sniperUpdate
     function_EndName: 
@@ -1415,6 +1433,8 @@ MonoBehaviour:
     price: 0
   - name: bomb
     rarity: 2
+    shownName: Bomb
+    summary: (Press F)
     function_StartName: CM_bombStart
     function_UpdateName: CM_bombUpdate
     function_EndName: 
@@ -1422,6 +1442,8 @@ MonoBehaviour:
     price: 0
   - name: break
     rarity: 3
+    shownName: Break
+    summary: (BackArrow) Slows down
     function_StartName: CM_breakStart
     function_UpdateName: 
     function_EndName: 

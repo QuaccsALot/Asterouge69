@@ -46,6 +46,12 @@ public class pewpew : MonoBehaviour
     private Dictionary<string, object>  initialPewPew;
 
 
+    [Header("OTHER STUFFS")]
+    public  int ADDpierce = 0;
+    public  float lifetimeMult = 1;
+    public  float scaleMult = 1;
+
+
 
 
 
@@ -78,8 +84,12 @@ public class pewpew : MonoBehaviour
 
 
         newnew.GetComponent<bullet>().speed = speed;
-        newnew.GetComponent<bullet>().lifeTime = lifetime;
+        newnew.GetComponent<bullet>().lifeTime = lifetime * lifetimeMult;
         newnew.GetComponent<bullet>().unlimitedPierce = unlimitedPierce;
+        newnew.GetComponent<bullet>().pierce += ADDpierce;
+
+        newnew.transform.localScale *= scaleMult;
+
 
         return newnew;
     }

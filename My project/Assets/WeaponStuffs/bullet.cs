@@ -4,8 +4,11 @@ public class bullet : MonoBehaviour
 {
     public float speed = 1f;
     public float lifeTime = .1f;
+    public int pierce = 0;
 
     public bool unlimitedPierce = false;
+
+    private int pierceCounter = 0;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -33,9 +36,9 @@ public class bullet : MonoBehaviour
 
     public void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Astroid") && !unlimitedPierce)
+        if (other.CompareTag("Astroid") && !unlimitedPierce && pierceCounter >= pierce)
         {
-            gameObject.SetActive(false);
+            Destroy(gameObject);
         }
 
 

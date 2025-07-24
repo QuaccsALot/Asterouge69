@@ -13,6 +13,8 @@ public class powerUp
     [Header("General (can touch)")]
     public string name = "";
     public byte rarity = 0; //common, uncommon, rare, legend
+    public string shownName;
+    public string summary;
 
     [Header("Function Names (can touch)")]
     public string function_StartName = "";
@@ -64,13 +66,21 @@ public class ConnectionManager : MonoBehaviour
 
 
 
-
+    
 
     [Header("Statics")] //NotShown!
     public static List<powerUp> powerUpDictionary = new List<powerUp>();
     public static List<powerUp> CURRENTpowerUps = new List<powerUp>();
     public static int CURRENTscore = 0;
     public static List<powerUp> needToInitializePowerUps = new List<powerUp>();
+
+
+    [Header("Extra stuffs lmao")] //Not Shown!
+    public static int ADDpierce = 0;
+    public static float lifetimeMult = 1;
+    public static float scaleMult = 1;
+
+    private pewpew pewpewRef;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
@@ -101,6 +111,17 @@ public class ConnectionManager : MonoBehaviour
         {
             CURRENTscore = instance.EXPO_CURRENTscore;
         }
+
+
+
+
+
+
+
+
+
+        // Get all public instance field
+        pewpewRef = GameObject.Find("Gun").GetComponent<pewpew>();
     }
 
 
@@ -153,6 +174,12 @@ public class ConnectionManager : MonoBehaviour
         }
 
 
+        if (SceneManager.GetActiveScene().name == "Gameplay" || SceneManager.GetActiveScene().name == "ShopUI2")
+        {
+            this.enabled = true;
+        }
+
+
 
         try
         {
@@ -173,13 +200,17 @@ public class ConnectionManager : MonoBehaviour
 
 
 
+        pewpewRef.ADDpierce = ADDpierce;
+        pewpewRef.lifetimeMult = lifetimeMult;
+        pewpewRef.scaleMult = scaleMult;
+    
+
+        
 
 
 
 
-
-
-
+        
 
 
 
