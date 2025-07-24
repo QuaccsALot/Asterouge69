@@ -1,7 +1,4 @@
 using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Threading;
-using UnityEditor.MemoryProfiler;
 using UnityEngine;
 
 public class AstroidLocalObj : MonoBehaviour
