@@ -130,28 +130,28 @@ public class Purchaseable : MonoBehaviour
             baseR = 136;
             baseG = 255;
             baseB = 0;
-            powerUpData.price = 4000;
+            powerUpData.price = 750;
         }
         else if (temprarity2 is 1)
         {
             baseR = 0;
             baseG = 215;
             baseB = 255;
-            powerUpData.price = 6000;
+            powerUpData.price = 1000;
         }
         else if (temprarity2 is 2)
         {
             baseR = 170;
             baseG = 0;
             baseB = 255;
-            powerUpData.price = 9000;
+            powerUpData.price = 1250;
         }
         else if (temprarity2 is 3)
         {
             baseR = 255;
             baseG = 170;
             baseB = 0;
-            powerUpData.price = 13000;
+            powerUpData.price = 900;
 
         }
         PriceText.text = new string("$" + powerUpData.price);

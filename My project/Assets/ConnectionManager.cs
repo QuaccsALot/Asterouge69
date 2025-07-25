@@ -132,19 +132,19 @@ public class ConnectionManager : MonoBehaviour
             switch (powerUpDictionary[i].rarity)
             {
                 case 0:
-                    powerUpDictionary[i].price = 4000;
+                    powerUpDictionary[i].price = 750;
                     break;
 
                 case 1:
-                    powerUpDictionary[i].price = 6000;
+                    powerUpDictionary[i].price = 1000;
                     break;
 
                 case 2:
-                    powerUpDictionary[i].price = 9000;
+                    powerUpDictionary[i].price = 1250;
                     break;
 
                 case 3:
-                    powerUpDictionary[i].price = 13000;
+                    powerUpDictionary[i].price = 900;
                     break;
 
                 default:
